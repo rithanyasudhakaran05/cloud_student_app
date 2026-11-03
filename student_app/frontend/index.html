@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Information System</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    padding-top: 80px;
+}
+.container {
+    background: white;
+    width: 400px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #cccccc;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+#result {
+    margin-top: 25px;
+    text-align: left;
+    line-height: 1.8;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Student Information</h1>
+<p>Student Information System</p>
+<button onclick="getStudentDetails()">
+Get Student Details
+</button>
+<div id="result"></div>
+</div>
+<script>
+function getStudentDetails() {
+    fetch("/student")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("result").innerHTML =
+        "<strong>Name:</strong> " + data.name + "<br>" +
+        "<strong>Department:</strong> " + data.department + "<br>" +
+        "<strong>Year:</strong> " + data.year;
+    })
+    .catch(error => {
+        document.getElementById("result").innerHTML =
+        "Unable to connect to backend.";
+    });
+}
+</script>
+</body>
+</html>
